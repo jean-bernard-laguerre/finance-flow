@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import BASE_URL from '../services/config'
+import BASE_URL from '../services/config';
 
-const Login = () => {
+const Register = () => {
 
     const [form, setForm] = useState({
         email: '',
+        username: '',
         password: '',
     });
 
@@ -18,8 +19,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(form);
-        fetch(`${BASE_URL}user/login.php`, {
+        fetch(`${BASE_URL}user/register.php`, {
             method: 'POST',
             body: JSON.stringify(form),
         })
@@ -41,6 +41,15 @@ const Login = () => {
                 />
             </label>
             <label>
+                Username:
+                <input
+                    type="text"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
                 Password:
                 <input
                     type="password"
@@ -49,9 +58,14 @@ const Login = () => {
                     onChange={handleChange}
                 />
             </label>
-            <button onClick={handleSubmit}>Submit</button>
+            <button
+                type="submit"
+                onClick={handleSubmit}
+            >
+                Register
+            </button>
         </form>
-    );
+    )
 };
 
-export default Login;
+export default Register;

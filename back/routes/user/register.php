@@ -1,5 +1,5 @@
 <?php
-    include_once '../classes/Transaction.php';
+    include_once '../../classes/User.php';
     header("Access-Control-Allow-Origin: *");
 
     $response = array(
@@ -7,13 +7,15 @@
         'message' => 'Error',
     );
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if($_SERVER["REQUEST_METHOD"] == 'POST') {
 
         $data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['id'];
+        $email = $data['email'];
+        $username = $data['username'];
+        $password = $data['password'];
 
-        $transaction = new Transaction();
-        if($transaction->deleteTransaction($id)){
+        $user = new User();
+        if($user->register($email, $username, $password)){
             $response['status'] = 1;
             $response['message'] = 'Success';
         }
