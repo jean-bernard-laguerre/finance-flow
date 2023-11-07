@@ -1,5 +1,5 @@
 <?php
-    include_once '../classes/Transaction.php';
+    include_once '../../classes/Transaction.php';
     header("Access-Control-Allow-Origin: *");
 
     $response = array(

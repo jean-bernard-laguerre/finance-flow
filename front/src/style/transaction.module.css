@@ -1,0 +1,11 @@
+.table {
+    width: clamp(600px, 80%, 1000px);
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+}
+
+.table_head {
+    background-color: #646cff;
+    color: #fff;
+}

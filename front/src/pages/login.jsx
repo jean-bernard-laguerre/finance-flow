@@ -1,9 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
-import BASE_URL from '../services/config'
+import AuthContext from '../context/authContext';
+import { useState, useContext } from 'react';
+import { BASE_URL } from '../services/config'
+import { redirect } from 'react-router-dom';
+import styles from '../style/form.module.css';
 
 const Login = () => {
 
+    const user = useContext(AuthContext)
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -18,39 +22,49 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(form);
         fetch(`${BASE_URL}user/login.php`, {
             method: 'POST',
             body: JSON.stringify(form),
         })
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
+            .then((auth) => {
+                if (auth.status == 1){
+                    user.login(auth.data)
+                    window.location.href = "/"
+            }
         })
     };
 
     return (
-        <form>
-            <label>
-                Email:
-                <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    onChange={handleChange}
-                />
-            </label>
-            <button onClick={handleSubmit}>Submit</button>
-        </form>
+        <div className={styles.container}>
+            <form className={styles.form}>
+                <label>
+                    Email:
+                    <input
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label>
+                    Password:
+                    <input
+                        type="password"
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                    />
+                </label>
+                <button onClick={handleSubmit}>Login</button>
+            </form>
+            <div>
+                <span>
+                    Pas encore inscrit ?
+                    <a href="/register">Inscription</a>
+                </span>
+            </div>
+        </div>
     );
 };
 

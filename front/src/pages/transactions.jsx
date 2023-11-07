@@ -6,7 +6,7 @@ import { BASE_URL } from '../services/config'
 import TransactionForm from '../components/transaction/transactionForm';
 import TransactionList from '../components/transaction/transactionList';
 
-const Home = () => {
+const Transactions = () => {
 
     const user = useContext(AuthContext)
     const [transactions, setTransactions] = useState(null)
@@ -32,16 +32,17 @@ const Home = () => {
         {
             user.currentUser ?
             (
-                <h2>
-                    Dashboard
-                </h2>
+                <>
+                    <TransactionForm />
+                    {transactions && <TransactionList transactions={transactions} />}
+                </>
             )
             :
             (
-                <h1>Home</h1>
+                <h1>Transactions</h1>
             )
         }
     </div>
 };
 
-export default Home;
+export default Transactions;
