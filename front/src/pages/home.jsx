@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
 import { BASE_URL } from '../services/config'
-import TransactionForm from '../components/transaction/transactionForm';
-import TransactionList from '../components/transaction/transactionList';
 
 const Home = () => {
 

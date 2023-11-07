@@ -33,8 +33,13 @@ const Transactions = () => {
             user.currentUser ?
             (
                 <>
-                    <TransactionForm />
-                    {transactions && <TransactionList transactions={transactions} />}
+                    <TransactionForm
+                        getTransactions={getTransactions}
+                    />
+                    {transactions && <TransactionList
+                        getTransactions={getTransactions}
+                        transactions={transactions} 
+                    />}
                 </>
             )
             :
