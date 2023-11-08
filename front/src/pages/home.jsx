@@ -10,10 +10,7 @@ const Home = () => {
     const [transactions, setTransactions] = useState(null)
 
     const getTransactions = () => {
-        fetch(`${BASE_URL}transaction/getTransactions.php`, {
-            method: 'POST',
-            body: JSON.stringify({user_id: user.currentUser.id}),
-        })
+        fetch(`${BASE_URL}transaction/getTransactions.php/?user_id=${user.currentUser.id}`)
             .then((response) => response.json())
             .then((data) => {
                 setTransactions(data.data)

@@ -1,3 +1,20 @@
+.header {
+    width: clamp(600px, 80%, 1000px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter select {
+    height: 100%;
+}
+
 .table {
     width: clamp(600px, 80%, 1000px);
     border-collapse: collapse;
@@ -8,4 +25,9 @@
 .table_head {
     background-color: #646cff;
     color: #fff;
+    height: 40px;
+}
+
+.balance {
+    outline: 1px solid #646cff;
 }

@@ -5,7 +5,7 @@
         private $host = "localhost";
         private $dbname = "finance-flow";
         private $username = "root";
-        private $password = "SuperP3scado";
+        private $password = "";
 
         public function __construct()
         {

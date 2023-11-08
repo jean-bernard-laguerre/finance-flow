@@ -12,7 +12,7 @@
         $data = json_decode(file_get_contents('php://input'), true);
         $title = $data['title'];
         $description = $data['description'];
-        $amount = intval($data['amount']);
+        $amount = floatval($data['amount']);
         $date = $data['date'];
         $place = $data['place'];
         $user_id = $data['user_id'];

@@ -11,7 +11,7 @@ const TransactionForm = (props) => {
     const [form, setForm] = useState({
         title: '',
         description: '',
-        amount: 0,
+        amount: '',
         date: '',
         place: '',
         category: 1,
@@ -66,6 +66,8 @@ const TransactionForm = (props) => {
                 <input
                     type="number"
                     name="amount"
+                    step={0.01}
+                    min={0}
                     value={form.amount}
                     onChange={handleChange}
                     placeholder="Amount"
@@ -88,16 +90,21 @@ const TransactionForm = (props) => {
                     name="category"
                     onChange={handleSelectChange}
                 >
-                    <option value="1">Credit</option>
-                    <option value="2">Debit</option>
+                    {props.categories.map((category) => {
+                        return (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        )
+                    })}
                 </select>
                 <select
                     name="subCategory"
                     onChange={handleSelectChange}
                 >
-                    <option value="1">Salary</option>
-                    <option value="2">Bonus</option>
-                    <option value="3">Other</option>
+                    {props.subCategories.map((category) => {
+                        return (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        )
+                    })}
                 </select>
 
 

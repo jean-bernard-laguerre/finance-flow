@@ -9,9 +9,7 @@
             $this->db = new Database();
         }
 
-        public function createTransaction($title, $description, $amount, $date, $place, $user_id, $category, $sub_category)
-        {
-
+        public function createTransaction($title, $description, $amount, $date, $place, $user_id, $category, $sub_category){
             $sql = "INSERT INTO transaction (title, description, amount, transaction_date, place, user_id, category_id, subcategory_id) VALUES (:title, :desc, :amount, :date, :place, :user_id, :category, :subcategory)";
             $stmt = $this->db->bdd->prepare($sql);
             $stmt->bindParam(':title', $title);
@@ -26,9 +24,10 @@
         }
 
         public function getUserTransactions($user_id){
-            $sql = "SELECT transaction.*, category.name AS category_name
+            $sql = "SELECT transaction.*, category.name AS category_name, subcategory.name AS subcategory_name
             FROM transaction
             JOIN category ON transaction.category_id = category.id
+            JOIN subcategory ON transaction.subcategory_id = subcategory.id
             WHERE user_id = :user_id";
             $stmt = $this->db->bdd->prepare($sql);
             $stmt->bindParam(':user_id', $user_id);

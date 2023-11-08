@@ -7,10 +7,9 @@
         'message' => 'Error',
     );
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-        $data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['id'];
+        $id = $_GET['id'];
 
         $transaction = new Transaction();
         if($transaction->deleteTransaction($id)){
