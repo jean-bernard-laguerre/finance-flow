@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
 import { BASE_URL } from '../services/config'
+import { Chart } from 'chart.js';
+import TransationChart from '../components/transaction/transactionChart';
 
 const Home = () => {
 
@@ -23,20 +25,22 @@ const Home = () => {
         }
     }, [transactions])
 
-    return <div>
-        {
-            user.currentUser ?
-            (
-                <h2>
-                    Dashboard
-                </h2>
-            )
-            :
-            (
-                <h1>Home</h1>
-            )
-        }
-    </div>
-};
-
+    return (
+        <div>
+            {
+                user.currentUser ?
+                (
+                    <h2>
+                        Dashboard
+                        <TransationChart />
+                    </h2>
+                )
+                :
+                (
+                    <h1>Home</h1>
+                )
+            }
+        </div>
+    );    
+}
 export default Home;
