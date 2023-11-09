@@ -4,10 +4,12 @@ import { BASE_URL } from '../../services/config';
 import { useContext } from 'react';
 import AuthContext from '../../context/authContext';
 import styles from '../../style/form.module.css';
+import TransactionContext from '../../context/transactionContext';
 
 const TransactionForm = (props) => {
 
     const user = useContext(AuthContext)
+    const settings = useContext(TransactionContext)
     const [form, setForm] = useState({
         title: '',
         description: '',
@@ -90,7 +92,7 @@ const TransactionForm = (props) => {
                     name="category"
                     onChange={handleSelectChange}
                 >
-                    {props.categories.map((category) => {
+                    {settings.categories.map((category) => {
                         return (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         )
@@ -100,7 +102,7 @@ const TransactionForm = (props) => {
                     name="subCategory"
                     onChange={handleSelectChange}
                 >
-                    {props.subCategories.map((category) => {
+                    {settings.subCategories.map((category) => {
                         return (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         )

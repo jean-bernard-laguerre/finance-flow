@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
+import TransactionContext from '../context/transactionContext';
 import { BASE_URL } from '../services/config'
 import transacTools from '../services/functions';
 import TransactionHeader from '../components/transaction/transactionHeader';
 import TransactionForm from '../components/transaction/transactionForm';
 import TransactionList from '../components/transaction/transactionList';
-import styles from '../style/transaction.module.css';
 
 const Transactions = () => {
 
@@ -17,16 +17,16 @@ const Transactions = () => {
     const [categories, setCategories] = useState(null)
     const [subCategories, setSubCategories] = useState(null)
 
-    const [filters, setFilters] = useState({
-        category: '',
-        subCategory: ''
-    })
+    const transactionsValues = useMemo(() =>{
+        return { transactions, categories, subCategories }
+    }, [transactions, categories, subCategories])
+
 
     const getTransactions = () => {
         fetch(`${BASE_URL}transaction/getTransactions.php/?user_id=${user.currentUser.id}`)
             .then((response) => response.json())
-            .then((data) => {
-                setTransactions(data.data)
+            .then((content) => {
+                setTransactions(content.data)
         })
     }
 
@@ -47,10 +47,6 @@ const Transactions = () => {
         })
     }
 
-    const filterTransactions = (filters) => {
-        setTransactions(transacTools.filterTransactions(transactions, filters))
-    }
-
     useEffect(() => {
         if(user.currentUser){
             !transactions && getTransactions()
@@ -64,31 +60,22 @@ const Transactions = () => {
             user.currentUser ?
             (
                 <>
-                    { (categories && subCategories) && (
-                        <>
+                    { (categories && subCategories && transactions) && (
+                        <TransactionContext.Provider value={transactionsValues}>
                             <TransactionForm
                                 getTransactions={getTransactions}
-                                categories={categories}
-                                subCategories={subCategories}
                             />
-                            <TransactionHeader 
-                                categories={categories}
-                                subCategories={subCategories}
-                                filterTransactions={filterTransactions}
+                            <TransactionList
+                                getTransactions={getTransactions}
                             />
-                        </>
+                        </TransactionContext.Provider >
                         )
                     }
-                    
-                    {transactions && <TransactionList
-                        getTransactions={getTransactions}
-                        transactions={transactions} 
-                    />}
                 </>
             )
             :
             (
-                <h1>Transactions</h1>
+                <h1>Login to access your transactions</h1>
             )
         }
     </div>

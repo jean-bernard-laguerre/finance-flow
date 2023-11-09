@@ -1,5 +1,5 @@
 .header {
-    width: clamp(600px, 80%, 1000px);
+    width: clamp(400px, 90%, 1000px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +16,7 @@
 }
 
 .table {
-    width: clamp(600px, 80%, 1000px);
+    width: clamp(400px, 90%, 1000px);
     border-collapse: collapse;
     border-spacing: 0;
     margin: auto;
@@ -30,4 +30,12 @@
 
 .balance {
     outline: 1px solid #646cff;
+}
+
+.sort_button {
+    background-color: inherit;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
