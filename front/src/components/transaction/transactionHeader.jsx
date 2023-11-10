@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import styles from '../../style/transaction.module.css';
+import TransactionContext from '../../context/transactionContext';
 
 const TransactionHeader = (props) => {
 
-    const [filter, setFilter] = useState({
-        category: '0',
-        subCategory: '0'
-    })
+    const settings = useContext(TransactionContext)
 
     const handleSelectChange = (event) => {
-        setFilter({
-            ...filter,
+        props.setFilter({
+            ...props.filter,
             [event.target.name]: event.target.value,
         });
     }
@@ -27,7 +25,7 @@ const TransactionHeader = (props) => {
                     onChange={handleSelectChange}
                 >
                     <option value={0}>All</option>
-                    {props.categories.map((category) => {
+                    {settings.categories.map((category) => {
                         return (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         )
@@ -38,7 +36,7 @@ const TransactionHeader = (props) => {
                     onChange={handleSelectChange}
                 >
                     <option value={0}>All</option>
-                    {props.subCategories.map((subCategory) => {
+                    {settings.subCategories.map((subCategory) => {
                         return (
                             <option key={subCategory.id} value={subCategory.id}>{subCategory.name}</option>
                         )
@@ -47,7 +45,7 @@ const TransactionHeader = (props) => {
                 <button
                     onClick={(event) => {
                         event.preventDefault();
-                        props.filterTransactions(filter);
+                        props.filterTransactions(props.filter);
                     }}
                 >
                     Filter

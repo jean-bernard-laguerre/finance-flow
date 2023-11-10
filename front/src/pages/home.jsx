@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
@@ -30,10 +30,7 @@ const Home = () => {
             {
                 user.currentUser ?
                 (
-                    <h2>
-                        Dashboard
-                        <TransationChart />
-                    </h2>
+                    <Dashboard />
                 )
                 :
                 (
