@@ -2,7 +2,6 @@ import React from 'react';
 import AuthContext from '../context/authContext';
 import { useState, useContext } from 'react';
 import { BASE_URL } from '../services/config'
-import { redirect } from 'react-router-dom';
 import styles from '../style/form.module.css';
 
 const Login = () => {

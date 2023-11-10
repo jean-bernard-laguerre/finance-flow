@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { BASE_URL, API } from '../services/config';
+import { BASE_URL } from '../services/config';
 import styles from '../style/form.module.css';
 
 const Register = () => {
