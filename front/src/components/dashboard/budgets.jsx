@@ -6,6 +6,8 @@ import { BASE_URL } from '../../services/config';
 import AuthContext from '../../context/authContext';
 import TransactionContext from '../../context/transactionContext';
 import transacTools from '../../services/functions';
+import BudgetView from './budgetView';
+import styles from '../../style/budget.module.css';
 
 const Budgets = () => {
 
@@ -28,25 +30,20 @@ const Budgets = () => {
     }, [budgets])
 
     return (
-        <div>
+        <div className={styles.container}>
             <BudgetsForm 
                 getBudgets={getBudgets}
             />
             {
                 budgets && budgets.map((budget) => (
-                    <div key={budget.id}>
-                        <span>
-                            {budget.category_name}:&nbsp;
-                        </span>
-                        <span>
-                            {transacTools.getSubBalance(
-                                values.transactions,
-                                budget.category_id,
-                            )}
-                            /
-                            {budget.amount} €</span>
-                        &nbsp;
-                    </div>
+                    <BudgetView
+                        key={budget.id}
+                        budget={budget}
+                        expenses={transacTools.getSubBalance(
+                            values.transactions,
+                            budget.category_id,
+                        )}
+                    />
                 ))
             }
         </div>
