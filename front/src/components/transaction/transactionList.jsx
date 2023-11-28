@@ -5,6 +5,7 @@ import TransactionContext from '../../context/transactionContext';
 import { BASE_URL } from '../../services/config';
 import TransactionHeader from './transactionHeader';
 import transacTools from '../../services/functions';
+import usePagination from '../../hooks/usePagination';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -41,6 +42,7 @@ const columns = [
 const TransactionList = ({ getTransactions }) => {
 
     const values = useContext(TransactionContext)
+    
     const [balance, setBalance] = useState(transacTools.getBalance(values.transactions))
     const [responsive, setResponsive] = useState(false)
     const [state, dispatch] = useReducer(reducer, {
@@ -54,6 +56,7 @@ const TransactionList = ({ getTransactions }) => {
         key: '',
         order: 'desc'
     })
+    const pagination = usePagination(state.transactions, 10)
 
     const filterTransactions = (filters) => {
         dispatch({ type: 'FILTER_TRANSACTIONS', payload: {
@@ -142,7 +145,7 @@ const TransactionList = ({ getTransactions }) => {
                     </thead>
                     <tbody>
                         {
-                            state.transactions.map((transaction) => {
+                            pagination.currentData().map((transaction) => {
                                 return (
                                     <tr key={transaction.id}>
                                         {
@@ -157,7 +160,10 @@ const TransactionList = ({ getTransactions }) => {
                                             })
                                         }
                                         <td>
-                                            <button onClick={() => deleteTransaction(transaction.id)}>X</button>
+                                            <button onClick={() => {
+                                                window.confirm(`Are you sure you want to delete ${transaction.title} ?`) &&
+                                                deleteTransaction(transaction.id)}
+                                            }>X</button>
                                         </td>
                                     </tr>
                                 )
@@ -168,6 +174,28 @@ const TransactionList = ({ getTransactions }) => {
                         <tr>
                             <td className={styles.table_head}>Balance:</td>
                             <td className={styles.balance}>{balance} €</td>
+                            <td className={styles.paginate}
+                                colSpan={columns.length - 2}
+                            >
+                                <button
+                                    disabled={(pagination.currentPage === 1)}
+                                    onClick={pagination.prev}
+                                >{"<-"}</button>
+                                <select
+                                    value={pagination.currentPage}
+                                    onChange={(e) => pagination.jump(e.target.value)}
+                                >
+                                    {
+                                        [...Array(pagination.maxPage)].map((page, index) => (
+                                            <option key={index} value={index + 1}>{index + 1}</option>
+                                        ))
+                                    }
+                                </select>
+                                <button
+                                    disabled={(pagination.currentPage === pagination.maxPage)}
+                                    onClick={pagination.next}
+                                >{"->"}</button>
+                            </td>
                         </tr>
                     </tfoot>
                 </table>

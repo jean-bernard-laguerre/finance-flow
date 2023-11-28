@@ -17,7 +17,7 @@ const TransactionHeader = (props) => {
     return (
         <div className={styles.header}>
             <span>
-                Transactions
+                <strong>Transactions</strong>
             </span>
             <form className={styles.filter} action="">
                 <select

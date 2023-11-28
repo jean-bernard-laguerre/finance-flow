@@ -34,6 +34,19 @@ const transacTools = {
         return Math.round(balance * 100) / 100;
     },
 
+    getTotalByCategory (transactions ) {
+        let total = {};
+
+        transactions.forEach((transaction) => {
+            total[transaction.subcategory_name] ? 
+                total[transaction.subcategory_name] += parseFloat(transaction.amount) 
+                : 
+                total[transaction.subcategory_name] = parseFloat(transaction.amount);
+        });
+
+        return total;
+    },
+
     filter (transactions, filters) {
 
         let filteredTransactions = [];

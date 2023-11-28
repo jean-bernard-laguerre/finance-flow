@@ -69,7 +69,7 @@ const BudgetForm = (props) => {
                 <button
                     onClick={handleSubmit}
                 >
-                    Create Budget
+                    Create/Update Budget
                 </button>
             </form>
         </div>
