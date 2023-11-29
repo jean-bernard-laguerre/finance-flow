@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import TransactionContext from '../../../context/transactionContext';
-import transacTools from '../../../services/functions';
+import finances from '../../../services/functions';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 
@@ -19,7 +19,7 @@ const TransactionPie = ( {title} ) => {
 
     const transactions = useContext(TransactionContext).transactions
     const filteredTransaction = transactions.filter(transaction => transaction.category_name === title)
-    const dataset = transacTools.getTotalByCategory(filteredTransaction)
+    const dataset = finances.getTotalByCategory(filteredTransaction)
 
     const data = {
         labels: Object.keys(dataset),

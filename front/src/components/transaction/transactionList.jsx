@@ -4,7 +4,7 @@ import styles from '../../style/transaction.module.css';
 import TransactionContext from '../../context/transactionContext';
 import { BASE_URL } from '../../services/config';
 import TransactionHeader from './transactionHeader';
-import transacTools from '../../services/functions';
+import finances from '../../services/functions';
 import usePagination from '../../hooks/usePagination';
 
 const reducer = (state, action) => {
@@ -12,12 +12,12 @@ const reducer = (state, action) => {
         case 'FILTER_TRANSACTIONS':
             return {
                 ...state,
-                transactions: transacTools.filter(action.payload.transactions, action.payload.filters)
+                transactions: finances.filter(action.payload.transactions, action.payload.filters)
             }
         case 'SORT_TRANSACTIONS':
             return {
                 ...state,
-                transactions: transacTools.sort(state.transactions, action.payload.sort.key, action.payload.sort.order)
+                transactions: finances.sort(state.transactions, action.payload.sort.key, action.payload.sort.order)
             }
         case 'REFRESH_TRANSACTIONS':
             return {
@@ -32,8 +32,8 @@ const reducer = (state, action) => {
 const columns = [
     {key: 'title', label: 'Title', sortable: true, hide: true},
     {key: 'amount', label: 'Amount', sortable: true, hide: false},
-    {key: 'description', label: 'Description', sortable: false, hide: true},
-    {key: 'place', label: 'Place', sortable: false, hide: true},
+    {key: 'description', label: 'Description', sortable: true, hide: true},
+    {key: 'place', label: 'Place', sortable: true, hide: true},
     {key: 'category_name', label: 'Category', sortable: true, hide: false},
     {key: 'subcategory_name', label: 'Sub Category', sortable: true, hide: true},
     {key: 'transaction_date', label: 'Date', sortable: true, hide: false},
@@ -43,7 +43,7 @@ const TransactionList = ({ getTransactions }) => {
 
     const values = useContext(TransactionContext)
     
-    const [balance, setBalance] = useState(transacTools.getBalance(values.transactions))
+    const [balance, setBalance] = useState(finances.getBalance(values.transactions))
     const [responsive, setResponsive] = useState(false)
     const [state, dispatch] = useReducer(reducer, {
         transactions: values.transactions
@@ -72,7 +72,7 @@ const TransactionList = ({ getTransactions }) => {
     }
 
     useEffect(() => {
-        setBalance(transacTools.getBalance(values.transactions))
+        setBalance(finances.getBalance(values.transactions))
         
         dispatch({ type: 'REFRESH_TRANSACTIONS', payload: {
             transactions: values.transactions
@@ -109,7 +109,7 @@ const TransactionList = ({ getTransactions }) => {
                 setFilter={setFilter}
                 filter={filter}
             />
-            <div>
+            <div className={styles.table_container}>
                 <table className={styles.table}>
                     <thead className={styles.table_head}>
                         <tr>
@@ -117,7 +117,7 @@ const TransactionList = ({ getTransactions }) => {
                                 columns.map((column) => {
                                     return (
                                         <th key={column.key}
-                                            className={column.hide && responsive ? 'hidden' : ''}
+                                        className={`${(column.hide && responsive) && 'hidden'} ${(column.key == 'description') ? styles.description : ''}`}
                                         >
                                             {column.sortable ? (
                                                 <button
@@ -128,14 +128,16 @@ const TransactionList = ({ getTransactions }) => {
                                                         sort: sort
                                                     } })
                                                 }}>
-                                                    {column.label} &nbsp;
+                                                    {column.label}
                                                     {sort.key === column.key ? (
-                                                        sort.order === 'asc' ? '▲' : '▼'
+                                                        ' ' + (sort.order === 'asc' ? '▲' : '▼')
                                                     ): ''}
                                                 </button>
                                             )
                                             : 
-                                            <>{column.label}</>}
+                                            <>
+                                                {column.label}
+                                            </>}
                                         </th>
                                     )
                                 })
@@ -170,35 +172,33 @@ const TransactionList = ({ getTransactions }) => {
                             })
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td className={styles.table_head}>Balance:</td>
-                            <td className={styles.balance}>{balance} €</td>
-                            <td className={styles.paginate}
-                                colSpan={columns.length - 2}
-                            >
-                                <button
-                                    disabled={(pagination.currentPage === 1)}
-                                    onClick={pagination.prev}
-                                >{"<-"}</button>
-                                <select
-                                    value={pagination.currentPage}
-                                    onChange={(e) => pagination.jump(e.target.value)}
-                                >
-                                    {
-                                        [...Array(pagination.maxPage)].map((page, index) => (
-                                            <option key={index} value={index + 1}>{index + 1}</option>
-                                        ))
-                                    }
-                                </select>
-                                <button
-                                    disabled={(pagination.currentPage === pagination.maxPage)}
-                                    onClick={pagination.next}
-                                >{"->"}</button>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
+                <div className={styles.footer}>
+                    <span className={styles.table_head}>Balance:</span>
+                    <span className={styles.balance}>{balance} €</span>
+                    <div className={styles.paginate}
+                        colSpan={columns.length - 2}
+                    >
+                        <button
+                            disabled={(pagination.currentPage === 1)}
+                            onClick={pagination.prev}
+                        >{"<-"}</button>
+                        <select
+                            value={pagination.currentPage}
+                            onChange={(e) => pagination.jump(e.target.value)}
+                        >
+                            {
+                                [...Array(pagination.maxPage)].map((page, index) => (
+                                    <option key={index} value={index + 1}>{index + 1}</option>
+                                ))
+                            }
+                        </select>
+                        <button
+                            disabled={(pagination.currentPage === pagination.maxPage)}
+                            onClick={pagination.next}
+                        >{"->"}</button>
+                    </div>
+                </div>
             </div>
         </>
     );

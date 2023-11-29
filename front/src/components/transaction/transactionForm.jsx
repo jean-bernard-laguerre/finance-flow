@@ -44,12 +44,12 @@ const TransactionForm = (props) => {
             .then((response) => response.json())
             .then((data) => {
                 props.getTransactions()
+                props.closeModal(false)
         })
     }
 
     return (
         <div className={styles.container}>
-            <h2>Add a transaction</h2>
             <form className={styles.form}>
                 <input
                     type="text"

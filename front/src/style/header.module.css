@@ -1,5 +1,10 @@
+/*
+style for header component
+*/
+
 .header {
     width: 100%;
+    background-color: #ffffff;
 }
 
 .nav {

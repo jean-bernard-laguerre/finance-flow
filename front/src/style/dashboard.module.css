@@ -1,8 +1,9 @@
 .container {
-  width: 80%;
+  flex: 1;
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  padding: 10px;
 }
 
 .graphContainer {
@@ -11,12 +12,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .pieContainer {
+  flex: 1;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+  }
 }

@@ -33,7 +33,7 @@ const Register = () => {
     };
 
     return (
-        <div className={styles.container}>
+        <section className={styles.container}>
             <form className={styles.form}>
                 <input
                     type="email"
@@ -63,7 +63,7 @@ const Register = () => {
                     Register
                 </button>
             </form>
-        </div>
+        </section>
     )
 };
 

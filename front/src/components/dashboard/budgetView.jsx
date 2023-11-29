@@ -5,7 +5,8 @@ const BudgetView = (props) => {
     return (
         <div className={styles.budget}>
             <span>
-                {props.budget.category_name}:&nbsp;
+                {props.budget.category_name}: {props.budget.amount} €
+                &nbsp;
             </span>
             <progress
                 className={`${styles.progress} ${(props.budget.amount >= props.expenses) ? styles.green : styles.red}`}
