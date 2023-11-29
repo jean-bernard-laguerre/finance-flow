@@ -35,7 +35,7 @@ const Login = () => {
     };
 
     return (
-        <div className={styles.container}>
+        <section className={styles.container}>
             <form className={styles.form}>
                 <input
                     type="email"
@@ -59,7 +59,7 @@ const Login = () => {
                     <a href="/register">Inscription</a>
                 </span>
             </div>
-        </div>
+        </section>
     );
 };
 

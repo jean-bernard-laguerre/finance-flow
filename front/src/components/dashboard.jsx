@@ -8,7 +8,7 @@ import styles from '../style/dashboard.module.css';
 const Dashboard = () => {
 
     return (
-        <>
+        <section>
             <h2>Dashboard</h2>
             <div className={styles.container}>
             
@@ -25,7 +25,7 @@ const Dashboard = () => {
                     </div>}
                 </div>
             </div>
-        </>
+        </section>
     )
 };
 

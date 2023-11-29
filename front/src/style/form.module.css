@@ -11,12 +11,18 @@ form input, form select {
 
 }
 
-
 .container {
     width: 50%;
     padding: 10px;
     margin: auto;
     border-radius: 5px;
     width:  fit-content;
+    border: 1px solid #ccc;
+}
+
+.budget {
+    padding: 10px;
+    border-radius: 5px;
+    width:  100%;
     border: 1px solid #ccc;
 }

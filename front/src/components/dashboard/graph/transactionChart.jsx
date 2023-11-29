@@ -3,25 +3,25 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import TransactionContext from '../../../context/transactionContext';
 import styles from '../../../style/graph.module.css';
+import finances from '../../../services/functions';
 
 
 const TransactionChart = () => {
 
     const transactions = useContext(TransactionContext).transactions
-    const Credit = transactions.filter(transaction => transaction.category_name === 'Credit')
-    const Debit = transactions.filter(transaction => transaction.category_name === 'Debit')
+    const perDay = finances.getPerDayReport(transactions)
     
     const data = {
-        labels: transactions.map(transaction => transaction.transaction_date),
+        labels: Object.keys(perDay),
         datasets: [{
             yAxisID: 'A',
             label: 'Credit',
-            data: Credit.map(transaction => Number(transaction.amount)),
+            data: Object.values(perDay).map(day => day.Credit),
         },
         {
             yAxisID: 'A',
             label: 'Debit',
-            data: Debit.map(transaction => Number(transaction.amount)),
+            data: Object.values(perDay).map(day => day.Debit),
         }]
     }
 
@@ -30,12 +30,18 @@ const TransactionChart = () => {
             A: {
                 beginAtZero: true
             }
-        }
+        },
+        maintainAspectRatio: false,
     }
 
     return (
         <div className={styles.graph}>
-            <Line data={data} options={options} />
+            <Line 
+                data={data}
+                options={options}
+                width={"100%"}
+                height={"100%"}
+            />
         </div>
     );
 };

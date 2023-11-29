@@ -1,8 +1,10 @@
 import React from 'react';
+import styles from '../../style/header.module.css';
+
 
 const Footer = () => {
     return (
-        <footer>
+        <footer className={styles.header}>
             <p>
                 <a
                     href="https://www.github.com/jean-bernard-laguerre/finance-flow"

@@ -4,10 +4,12 @@ import { useContext } from 'react';
 import AuthContext from '../context/authContext';
 import TransactionContext from '../context/transactionContext';
 import { BASE_URL } from '../services/config'
-import transacTools from '../services/functions';
+import finances from '../services/functions';
 import TransactionHeader from '../components/transaction/transactionHeader';
 import TransactionForm from '../components/transaction/transactionForm';
 import TransactionList from '../components/transaction/transactionList';
+import styles from '../style/transaction.module.css';
+import Modal from '../components/layout/modal';
 
 const Transactions = () => {
 
@@ -16,6 +18,7 @@ const Transactions = () => {
     const [transactions, setTransactions] = useState(null)
     const [categories, setCategories] = useState(null)
     const [subCategories, setSubCategories] = useState(null)
+    const [open, setOpen] = useState(false)
 
     const transactionsValues = useMemo(() =>{
         return { transactions, categories, subCategories }
@@ -55,16 +58,31 @@ const Transactions = () => {
         }
     }, [transactions])
 
-    return <div>
+    return <section>
         {
             user.currentUser ?
             (
                 <>
                     { (categories && subCategories && transactions) && (
                         <TransactionContext.Provider value={transactionsValues}>
-                            <TransactionForm
-                                getTransactions={getTransactions}
-                            />
+
+                            <div className={styles.title}>
+                                <h2>
+                                    Transactions
+                                    &nbsp;
+                                </h2>
+                                <button onClick={() => setOpen(true)}>Add</button>
+                            </div>
+                            <Modal
+                                title="Add a transaction"
+                                openModal={open}
+                                setOpenModal={setOpen}
+                            >
+                                <TransactionForm
+                                    getTransactions={getTransactions}
+                                    closeModal={setOpen}
+                                />
+                            </Modal>
                             <TransactionList
                                 getTransactions={getTransactions}
                             />
@@ -78,7 +96,7 @@ const Transactions = () => {
                 <h1>Login to access your transactions</h1>
             )
         }
-    </div>
+    </section>
 };
 
 export default Transactions;

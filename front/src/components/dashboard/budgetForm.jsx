@@ -46,7 +46,7 @@ const BudgetForm = (props) => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.budget}>
             <form className={styles.form}>
                 <select
                     name="category_id"

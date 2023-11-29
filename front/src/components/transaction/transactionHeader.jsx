@@ -6,6 +6,7 @@ import TransactionContext from '../../context/transactionContext';
 const TransactionHeader = (props) => {
 
     const settings = useContext(TransactionContext)
+    const [filter, setFilter] = useState(props.filter);
 
     const handleSelectChange = (event) => {
         props.setFilter({
@@ -17,7 +18,17 @@ const TransactionHeader = (props) => {
     return (
         <div className={styles.header}>
             <span>
-                <strong>Transactions</strong>
+                <strong>{
+                    filter.category === "0" ?
+                        'All' :
+                        settings.categories.filter(category => category.id === filter.category)[0].name
+                    } {
+
+                    filter.subCategory === "0" ?
+                        '' :
+                        "/ "+settings.subCategories.filter(subCategory => subCategory.id === filter.subCategory)[0].name
+                    }
+                </strong>
             </span>
             <form className={styles.filter} action="">
                 <select
@@ -46,6 +57,7 @@ const TransactionHeader = (props) => {
                     onClick={(event) => {
                         event.preventDefault();
                         props.filterTransactions(props.filter);
+                        setFilter(props.filter);
                     }}
                 >
                     Filter
