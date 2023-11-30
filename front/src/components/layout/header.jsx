@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useContext, useEffect } from 'react';
 import AuthContext from '../../context/authContext';
 import styles from '../../style/header.module.css';
+import Drawer from './header/drawer';
 
 const Header = () => {
 
@@ -70,6 +71,10 @@ const Header = () => {
                     }
                 </menu>
             </nav>
+            {/* responsive drawer header */}
+            <Drawer 
+                user={user}
+            />
         </header>
     );
 };
