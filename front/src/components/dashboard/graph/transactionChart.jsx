@@ -32,6 +32,7 @@ const TransactionChart = () => {
             }
         },
         maintainAspectRatio: false,
+        responsive: true,
     }
 
     return (

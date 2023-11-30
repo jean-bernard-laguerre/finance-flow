@@ -149,7 +149,10 @@ const TransactionList = ({ getTransactions }) => {
                         {
                             pagination.currentData().map((transaction) => {
                                 return (
-                                    <tr key={transaction.id}>
+                                    <tr 
+                                        key={transaction.id}
+                                        className={transaction.category_name == "Debit" ? styles.debit : styles.credit}
+                                    >
                                         {
                                             columns.map((column) => {
                                                 return (
@@ -162,10 +165,14 @@ const TransactionList = ({ getTransactions }) => {
                                             })
                                         }
                                         <td>
-                                            <button onClick={() => {
-                                                window.confirm(`Are you sure you want to delete ${transaction.title} ?`) &&
-                                                deleteTransaction(transaction.id)}
-                                            }>X</button>
+                                            <button 
+                                                className={styles.delete_button}
+                                                onClick={() => {
+                                                    window.confirm(`Are you sure you want to delete ${transaction.title} ?`) &&
+                                                    deleteTransaction(transaction.id)}
+                                            }>
+                                                X
+                                            </button>
                                         </td>
                                     </tr>
                                 )

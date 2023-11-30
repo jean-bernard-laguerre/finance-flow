@@ -15,6 +15,7 @@ const Modal = ({ children, title, openModal, setOpenModal }) => {
                     <div className={styles.content}>
                         <div className={styles.header}>
                             <h2>{title}</h2>
+                            &nbsp;
                             <span className={styles.close} onClick={handleClose}>&times;</span>
                         </div>
                         <div className={styles.body}>

@@ -93,7 +93,7 @@ const Transactions = () => {
             )
             :
             (
-                <h1>Login to access your transactions</h1>
+                <h1>Login to manage your finances</h1>
             )
         }
     </section>

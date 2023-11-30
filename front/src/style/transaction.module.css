@@ -69,9 +69,25 @@
     overflow: auto;
 }
 
+.credit {
+    background-color: #00ff000f;
+}
+
+.debit {
+    background-color: #ff000010;
+}
+
 .table_body tr {
     display: table;
-    line-height: 40px;}
+    line-height: 40px;
+}
+    
+.delete_button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 
 .balance {
     flex: 1;
