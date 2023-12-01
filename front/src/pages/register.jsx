@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { BASE_URL } from '../services/config';
 import styles from '../style/form.module.css';
+import useForm from '../hooks/useForm';
+
+const validateForm = (form) => {
+            
+    let valid = true
+    let fields = ['email', 'username', 'password']
+
+    fields.forEach((field) => {
+        if(form[field] == '' || form[field] == undefined) {
+            valid = false
+        }
+    })
+    return valid
+}
 
 const Register = () => {
 
-    const [form, setForm] = useState({
+    const form = useForm({
         email: '',
         username: '',
         password: '',
-    });
-
-    const handleChange = (event) => {
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value,
-        });
-    };
+    }, validateForm)
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
         fetch(`${BASE_URL}user/register.php`, {
             method: 'POST',
-            body: JSON.stringify(form),
+            body: JSON.stringify(form.values),
         })
             .then((response) => response.json())
             .then((data) => {
@@ -32,32 +40,40 @@ const Register = () => {
         })
     };
 
+
     return (
-        <section className={styles.container}>
+        <section className={`${styles.container} ${styles.login}`}>
+            <h2>Create your account</h2>
             <form className={styles.form}>
+                <label htmlFor="email">Email</label>
                 <input
                     type="email"
                     name="email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={form.handleChange}
                     placeholder="Email"
                 />
+
+                <label htmlFor="username">Username</label>
                 <input
                     type="text"
                     name="username"
                     value={form.username}
-                    onChange={handleChange}
+                    onChange={form.handleChange}
                     placeholder="Username"
                 />
+
+                <label htmlFor="password">Password</label>
                 <input
                     type="password"
                     name="password"
                     value={form.password}
-                    onChange={handleChange}
+                    onChange={form.handleChange}
                     placeholder="Password"
                 />
                 <button
-                    type="submit"
+                    title='Create your account'
+                    disabled={!form.valid}
                     onClick={handleSubmit}
                 >
                     Register

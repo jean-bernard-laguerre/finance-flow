@@ -2,17 +2,18 @@ import React from 'react';
 import { useContext } from 'react';
 import TransactionContext from '../../../context/transactionContext';
 import finances from '../../../services/functions';
+import styles from '../../../style/graph.module.css';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 const Colors = {
-    Food: "#0074D9",
-    Transport: "#FF4136",
-    Health: "#2ECC40",
-    Entertainment: "#FF851B",
-    Education: "#7FDBFF",
-    Salary: "#B10DC9",
-    Other: "#FFDC00",
+    Food: "#0074D9C0",
+    Transport: "#FF4136C0",
+    Health: "#2ECC40C0",
+    Entertainment: "#FF851BC0",
+    Education: "#7FDBFFC0",
+    Salary: "#B10DC9C0",
+    Other: "#FFDC00C0",
 }
 
 const TransactionPie = ( {title} ) => {
@@ -47,7 +48,7 @@ const TransactionPie = ( {title} ) => {
     }
 
     return (
-        <div>
+        <div className={styles.pie}>
             <Pie data={data} options={options} />
         </div>
     );

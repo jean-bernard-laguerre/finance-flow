@@ -21,6 +21,7 @@ const router = createBrowserRouter(routes)
 
 const App = () => {
 
+  const [responsive, setResponsive] = useState(false)
   const [currentUser, setCurrentUser] = useState(
     localStorage.getItem('user') ?
     JSON.parse(localStorage.getItem('user')) : null

@@ -14,9 +14,13 @@ const Modal = ({ children, title, openModal, setOpenModal }) => {
                 <div className={styles.container}>
                     <div className={styles.content}>
                         <div className={styles.header}>
-                            <h2>{title}</h2>
-                            &nbsp;
-                            <span className={styles.close} onClick={handleClose}>&times;</span>
+                            <span>
+                                <h2>{title}</h2>
+                            </span>
+                            <button
+                                title='Close'
+                                className={styles.close}
+                                onClick={handleClose}>&times;</button>
                         </div>
                         <div className={styles.body}>
                             {children}

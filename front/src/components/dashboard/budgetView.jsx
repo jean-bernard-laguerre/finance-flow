@@ -9,7 +9,15 @@ const BudgetView = (props) => {
                 &nbsp;
             </span>
             <progress
-                className={`${styles.progress} ${(props.budget.amount >= props.expenses) ? styles.green : styles.red}`}
+                className={`${styles.progress} ${
+                    props.expenses >= props.budget.amount  ?
+                    styles.red :
+                    props.expenses >= props.budget.amount * 0.7 ?
+                    styles.orange :
+                    props.expenses >= props.budget.amount * 0.5 ?
+                    styles.yellow :
+                    styles.green
+                }`}
                 value={props.expenses}
                 max={props.budget.amount}
                 title={`${props.expenses} € / ${props.budget.amount} €`}

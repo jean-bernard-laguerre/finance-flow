@@ -54,6 +54,7 @@ const TransactionHeader = (props) => {
                     })}
                 </select>
                 <button
+                    title='Filter transactions'
                     onClick={(event) => {
                         event.preventDefault();
                         props.filterTransactions(props.filter);

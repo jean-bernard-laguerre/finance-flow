@@ -1,3 +1,16 @@
+/* colors */
+#root {
+  --primary: #383a47;
+  --secondary: #479db4;
+  --header: #ffffff;
+  --section: #ffffff;
+  --green: #48d048;
+  --red: #ff0000;
+  --yellow: #ffcc00;
+  --orange: #ff6600;
+  --background: #e6e6e6;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,9 +18,9 @@
 
   /* color-scheme: light dark; */
   color: #213547;
-  background-color: rgb(57, 59, 73);
+  background-color: #383a47;
 
-  font-synthesis: none;
+  font-synthesis: none; 
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,19 +30,19 @@
 section {
   width: fit-content;
   max-width: 80%;
-  background-color: #ffffff;
+  background-color: var(--section);
   padding: 10px;
-  margin: 10px auto;
+  margin: 40px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #747bff;
+  color: var(--secondary);
 }
 
 body {
@@ -48,21 +61,38 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  background-color: #f9f9f9;
+  background-color: inherit;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.4em;
+  vertical-align: middle;
+  background-size: contain;
+}
+
+.add {
+  background-image: url('./style/icons/icons8-ajouter-50.png');
+}
+.delete {
+  background-image: url('./style/icons/icons8-supprimer-48.png');
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -78,7 +108,7 @@ button:focus-visible {
   }
 } */
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
   section {
     width: 100%;
     max-width: 100vw;
