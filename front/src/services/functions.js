@@ -59,7 +59,17 @@ const finances = {
             perDayReport[transaction.transaction_date][transaction.category_name] += parseFloat(transaction.amount);
             
         });
-        return perDayReport;
+        
+        // order by date
+        let sortedPerDayReport = Object.keys(perDayReport).sort().reduce(
+            (obj, key) => { 
+                obj[key] = perDayReport[key]; 
+                return obj;
+            }, 
+            {}
+        );
+
+        return sortedPerDayReport;
     },
 
     filter (transactions, filters) {

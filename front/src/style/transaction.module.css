@@ -6,7 +6,7 @@
 
 .header {
     border-style: inset;
-    border: 1px solid #646cff;
+    border: 1px solid var(--primary);
     width: clamp(350px, 100%, 100vw);
     padding: 0 20px;
     display: flex;
@@ -17,7 +17,7 @@
 
 .footer {
     display: flex;
-    outline: 1px solid #646cff;
+    outline: 1px solid var(--primary);
     position: relative;
     height: 40px;
     bottom: 0;
@@ -36,7 +36,11 @@
 }
 
 .filter select {
-    height: 100%;
+    height: 40px;
+    width: 100px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
 }
 
 .table_container {
@@ -58,8 +62,8 @@
 }
 
 .table_head {
-    border: 1px solid #646cff;
-    background-color: #646cff;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
     color: #fff;
     height: 40px;
 }
@@ -67,6 +71,18 @@
 .table_body {
     width: inherit;
     overflow: auto;
+}
+
+.table_body tr .delete_button {
+    visibility: hidden;
+}
+
+.table_body tr .delete_button::before{
+    
+}
+
+.table_body tr:hover .delete_button {
+    visibility: inherit;
 }
 
 .credit {
@@ -77,22 +93,35 @@
     background-color: #ff000010;
 }
 
+.credit:hover {
+    background-color: #04a00449;
+}
+
+.debit:hover {
+    background-color: #ff000049;
+}
+
 .table_body tr {
-    display: table;
-    line-height: 40px;
+    border-top: 2px solid #ffffff;
 }
     
 .delete_button {
+    margin: auto;
     background-color: inherit;
     border: none;
     outline: none;
     cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.delete_button:hover {
+    filter: drop-shadow(0 0 3px var(--red));
 }
 
 .balance {
     flex: 1;
     height: 100%;
-    outline: 1px solid #646cff;
+    outline: 1px solid var(--primary);
 }
 
 .sort_button {
@@ -112,4 +141,11 @@
 
 .paginate select {
     height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+    }
 }

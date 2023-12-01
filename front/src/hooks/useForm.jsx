@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 const useForm = (form, validation) => {
 
     const [errors, setErrors] = useState({});
     const [values, setValues] = useState(form);
+    const [valid, setValid] = useState(false);
 
     const handleChange = (event) => {
         console.log(values)
@@ -21,20 +22,15 @@ const useForm = (form, validation) => {
         });
     };
 
-    const isSubmitting = () => {
-        setErrors(validation(values));
-        console.log(values, errors)
-        if (Object.keys(errors).length === 0) {
-            return true;
-        }
-        return false;
-    };
+    useEffect(() => {
+        setValid(validation(values));
+    }, [values]);
 
     return { 
         handleChange,
         handleSelectChange, 
-        isSubmitting,
-        values: form, 
+        values,
+        valid, 
         errors 
     };
 };

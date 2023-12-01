@@ -71,7 +71,12 @@ const Transactions = () => {
                                     Transactions
                                     &nbsp;
                                 </h2>
-                                <button onClick={() => setOpen(true)}>Add</button>
+                                <button
+                                    title='Add a transaction'
+                                    onClick={() => setOpen(true)}>
+                                    <div className="icon add"/>
+                                    <span>Add</span>
+                                </button>
                             </div>
                             <Modal
                                 title="Add a transaction"

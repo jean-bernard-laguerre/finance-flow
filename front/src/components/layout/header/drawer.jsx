@@ -8,7 +8,9 @@ const Drawer = ({user}) => {
     return (
         <div className={styles.drawer}>
             <div className={styles.drawer_header}>
-                    <span>
+                    <span
+                        className={styles.brand}
+                    >
                         {
                             user.currentUser ?
                             `${user.currentUser.username}`

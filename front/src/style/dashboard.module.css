@@ -16,12 +16,16 @@
 
 .pieContainer {
   flex: 1;
-  width: 100%;
+  width: 99%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pieContainer div {
+  flex: 1;
 }
 
 @media screen and (max-width: 768px) {
@@ -30,3 +34,9 @@
     width: 100%;
   }
 }
+
+/* @media screen and (max-width: 1024px) {
+  .container {
+    flex-wrap: wrap;
+  }
+} */

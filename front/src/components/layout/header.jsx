@@ -7,11 +7,20 @@ import Drawer from './header/drawer';
 const Header = () => {
 
     const user = useContext(AuthContext)
+    const location = window.location.pathname
+
+    useEffect(() => {
+        if(!user.currentUser && ['transactions', ''].includes(location.split('/')[1])) {
+            window.location.href = '/login'
+        }
+    }, [user])
     
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
-                <span>
+                <span
+                    className={styles.brand}
+                >
                     {
                         user.currentUser ?
                         `${user.currentUser.username}`

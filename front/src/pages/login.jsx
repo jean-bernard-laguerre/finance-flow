@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AuthContext from '../context/authContext';
 import { useState, useContext } from 'react';
 import { BASE_URL } from '../services/config'
 import styles from '../style/form.module.css';
+import useForm from '../hooks/useForm';
+
+const validateForm = (form) => {
+
+    let valid = true
+    let fields = ['email', 'password']
+
+    fields.forEach((field) => {
+        if(form[field] == '' || form[field] == undefined) {
+            valid = false
+        }
+    })
+    return valid
+}
 
 const Login = () => {
 
     const user = useContext(AuthContext)
-    const [form, setForm] = useState({
+    const [valid, setValid] = useState(false)
+
+    const form = useForm({
         email: '',
         password: '',
-    });
-
-    const handleChange = (event) => {
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value,
-        });
-    };
+    }, validateForm)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         fetch(`${BASE_URL}user/login.php`, {
             method: 'POST',
-            body: JSON.stringify(form),
+            body: JSON.stringify(form.values),
         })
             .then((response) => response.json())
             .then((auth) => {
@@ -35,28 +44,34 @@ const Login = () => {
     };
 
     return (
-        <section className={styles.container}>
+        <section className={`${styles.container} ${styles.login}`}>
+            <h2>Login to manage your finances</h2>
             <form className={styles.form}>
+                <label htmlFor="email">Email</label>
                 <input
                     type="email"
                     name="email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={form.handleChange}
                     placeholder="Email"
                 />
+                <label htmlFor="password">Password</label>
                 <input
                     type="password"
                     name="password"
                     value={form.password}
-                    onChange={handleChange}
+                    onChange={form.handleChange}
                     placeholder="Password"
                 />
-                <button onClick={handleSubmit}>Login</button>
+                <button
+                    title='Login to your account'
+                    disabled={!form.valid}
+                    onClick={handleSubmit}>Login</button>
             </form>
             <div>
                 <span>
-                    Pas encore inscrit ?
-                    <a href="/register">Inscription</a>
+                    Not registered yet?&nbsp; 
+                    <a href="/register">Register</a>
                 </span>
             </div>
         </section>

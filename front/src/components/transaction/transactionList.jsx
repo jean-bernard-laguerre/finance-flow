@@ -145,7 +145,7 @@ const TransactionList = ({ getTransactions }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className={styles.table_body}>
                         {
                             pagination.currentData().map((transaction) => {
                                 return (
@@ -171,7 +171,10 @@ const TransactionList = ({ getTransactions }) => {
                                                     window.confirm(`Are you sure you want to delete ${transaction.title} ?`) &&
                                                     deleteTransaction(transaction.id)}
                                             }>
-                                                X
+                                                <div
+                                                    title='Delete'
+                                                    className='icon delete'
+                                                />
                                             </button>
                                         </td>
                                     </tr>
@@ -187,6 +190,7 @@ const TransactionList = ({ getTransactions }) => {
                         colSpan={columns.length - 2}
                     >
                         <button
+                            title='Previous page'
                             disabled={(pagination.currentPage === 1)}
                             onClick={pagination.prev}
                         >{"<-"}</button>
@@ -201,6 +205,7 @@ const TransactionList = ({ getTransactions }) => {
                             }
                         </select>
                         <button
+                            title='Next page'
                             disabled={(pagination.currentPage === pagination.maxPage)}
                             onClick={pagination.next}
                         >{"->"}</button>
