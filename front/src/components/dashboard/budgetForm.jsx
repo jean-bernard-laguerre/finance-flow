@@ -9,15 +9,18 @@ import useForm from '../../hooks/useForm';
 
 const validateForm = (form) => {
 
-    let valid = true
+    let errors = {}
     let fields = ['amount', 'category_id']
+
+    errors.amount = parseFloat(form.amount) <= 0 ? 'Amount must be greater than 0' : ''
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {
-            valid = false
+            errors[field] = 'This field is required'
         }
     })
-    return valid
+
+    return errors
 }
 
 const BudgetForm = (props) => {
@@ -60,14 +63,21 @@ const BudgetForm = (props) => {
                         ))
                     }
                 </select>
+                {form.errors.category_id && (
+                    <p className={styles.error}>{form.errors.category_id}</p>                
+                )}
                 <label htmlFor="amount">Amount</label>
                 <input
                     type="number"
                     name="amount"
                     step={0.01}
+                    min={0.01}
                     placeholder="Amount"
                     onChange={form.handleChange}
                 />
+                {form.errors.amount && (
+                    <p className={styles.error}>{form.errors.amount}</p>                
+                )}
                 <button
                     disabled={!form.valid}
                     onClick={handleSubmit}

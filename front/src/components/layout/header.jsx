@@ -29,17 +29,17 @@ const Header = () => {
                     }
                 </span>
                 <menu className={styles.menu}>
-                    <li>
-                        <button
-                            className={styles.button}
-                            onClick={() => window.location.href='/'}
-                        >
-                            Home
-                        </button>
-                    </li>
                     {
                         user.currentUser ?
                         <>
+                            <li>
+                                <button
+                                    className={styles.button}
+                                    onClick={() => window.location.href='/'}
+                                >
+                                    Home
+                                </button>
+                            </li>
                             <li>
                                 <button
                                     className={styles.button}

@@ -23,8 +23,12 @@ const useForm = (form, validation) => {
     };
 
     useEffect(() => {
-        setValid(validation(values));
+        setErrors(validation(values));
     }, [values]);
+
+    useEffect(() => {
+        setValid(Object.keys(errors).length === 0)
+    }, [errors]);
 
     return { 
         handleChange,

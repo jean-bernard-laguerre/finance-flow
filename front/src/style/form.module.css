@@ -50,6 +50,13 @@
     background-color: color(var(--primary) shade(30%));
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+    margin: 5px;
+    text-align: right;
+}
+
 .container {
     width: 100%;
     padding: 10px;

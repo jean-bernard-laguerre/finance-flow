@@ -6,15 +6,15 @@ import useForm from '../hooks/useForm';
 
 const validateForm = (form) => {
             
-    let valid = true
+    let errors = {}
     let fields = ['email', 'username', 'password']
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {
-            valid = false
+            errors[field] = 'This field is required'
         }
     })
-    return valid
+    return errors
 }
 
 const Register = () => {
@@ -53,6 +53,9 @@ const Register = () => {
                     onChange={form.handleChange}
                     placeholder="Email"
                 />
+                {form.errors.email && (
+                    <p className={styles.error}>{form.errors.email}</p>
+                )}
 
                 <label htmlFor="username">Username</label>
                 <input
@@ -62,6 +65,9 @@ const Register = () => {
                     onChange={form.handleChange}
                     placeholder="Username"
                 />
+                {form.errors.username && (
+                    <p className={styles.error}>{form.errors.username}</p>
+                )}
 
                 <label htmlFor="password">Password</label>
                 <input
@@ -71,6 +77,10 @@ const Register = () => {
                     onChange={form.handleChange}
                     placeholder="Password"
                 />
+                {form.errors.password && (
+                    <p className={styles.error}>{form.errors.password}</p>
+                )}
+
                 <button
                     title='Create your account'
                     disabled={!form.valid}

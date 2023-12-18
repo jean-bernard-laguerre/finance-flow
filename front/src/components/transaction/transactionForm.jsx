@@ -9,15 +9,19 @@ import useForm from '../../hooks/useForm';
 
 const validateForm = (form) => {
 
-    let valid = true
+    let errors  = {}
     let fields = ['title', 'description', 'amount', 'date', 'place']
+
+    errors.amount = parseFloat(form.amount) <= 0 ? 'Amount must be greater than 0' : ''
+    errors.date = form.date > new Date().toISOString().split('T')[0] ? 'Date must be in the past' : ''
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {
-            valid = false
+            errors[field] = 'This field is required'
         }
     })
-    return valid
+
+    return errors
 }
 
 const TransactionForm = (props) => {
@@ -60,6 +64,9 @@ const TransactionForm = (props) => {
                     onChange={form.handleChange}
                     placeholder="Title"
                 />
+                {form.errors.title && (
+                    <p className={styles.error}>{form.errors.title}</p>
+                )}
                 <label htmlFor="description">Description</label>
                 <input
                     type="text"
@@ -68,16 +75,22 @@ const TransactionForm = (props) => {
                     onChange={form.handleChange}
                     placeholder="Description"
                 />
+                {form.errors.description && (
+                    <p className={styles.error}>{form.errors.description}</p>
+                )}
                 <label htmlFor="amount">Amount</label>
                 <input
                     type="number"
                     name="amount"
                     step={0.01}
-                    min={0}
+                    min={0.01}
                     value={form.amount}
                     onChange={form.handleChange}
                     placeholder="Amount"
                 />
+                {form.errors.amount && (
+                    <p className={styles.error}>{form.errors.amount}</p>
+                )}
                 <label htmlFor="date">Date</label>
                 <input
                     type="date"
@@ -86,6 +99,9 @@ const TransactionForm = (props) => {
                     onChange={form.handleChange}
                     placeholder="Date"
                 />
+                {form.errors.date && (
+                    <p className={styles.error}>{form.errors.date}</p>
+                )}
                 <label htmlFor="place">Place</label>
                 <input
                     type="text"
@@ -94,6 +110,9 @@ const TransactionForm = (props) => {
                     onChange={form.handleChange}
                     placeholder="Place"
                 />
+                {form.errors.place && (
+                    <p className={styles.error}>{form.errors.place}</p>
+                )}
                 <label htmlFor="category">Category</label>
                 <select
                     name="category"
@@ -105,6 +124,9 @@ const TransactionForm = (props) => {
                         )
                     })}
                 </select>
+                {form.errors.category && (
+                    <p className={styles.error}>{form.errors.category}</p>
+                )}
                 <label htmlFor="subCategory">SubCategory</label>
                 <select
                     name="subCategory"
@@ -116,7 +138,9 @@ const TransactionForm = (props) => {
                         )
                     })}
                 </select>
-
+                {form.errors.subCategory && (
+                    <p className={styles.error}>{form.errors.subCategory}</p>
+                )}
 
                 <button
                     disabled={!form.valid}

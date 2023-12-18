@@ -7,15 +7,15 @@ import useForm from '../hooks/useForm';
 
 const validateForm = (form) => {
 
-    let valid = true
+    let errors = {}
     let fields = ['email', 'password']
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {
-            valid = false
+            errors[field] = 'This field is required'
         }
     })
-    return valid
+    return errors
 }
 
 const Login = () => {
@@ -55,6 +55,9 @@ const Login = () => {
                     onChange={form.handleChange}
                     placeholder="Email"
                 />
+                {form.errors.email && (
+                    <p className={styles.error}>{form.errors.email}</p>
+                )}
                 <label htmlFor="password">Password</label>
                 <input
                     type="password"
@@ -63,6 +66,9 @@ const Login = () => {
                     onChange={form.handleChange}
                     placeholder="Password"
                 />
+                {form.errors.password && (
+                    <p className={styles.error}>{form.errors.password}</p>
+                )}
                 <button
                     title='Login to your account'
                     disabled={!form.valid}
