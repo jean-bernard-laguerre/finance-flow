@@ -12,8 +12,8 @@ const validateForm = (form) => {
     let errors  = {}
     let fields = ['title', 'description', 'amount', 'date', 'place']
 
-    errors.amount = parseFloat(form.amount) <= 0 ? 'Amount must be greater than 0' : ''
-    errors.date = form.date > new Date().toISOString().split('T')[0] ? 'Date must be in the past' : ''
+    parseFloat(form.amount) <= 0 && (errors.amount = 'Amount must be greater than 0')
+    form.date > new Date().toISOString().split('T')[0] && (errors.date = 'Date must be in the past')
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {

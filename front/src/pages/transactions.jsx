@@ -60,7 +60,7 @@ const Transactions = () => {
 
     return <section>
         {
-            user.currentUser ?
+            user.currentUser &&
             (
                 <>
                     { (categories && subCategories && transactions) && (
@@ -95,10 +95,6 @@ const Transactions = () => {
                         )
                     }
                 </>
-            )
-            :
-            (
-                <h1>Login to manage your finances</h1>
             )
         }
     </section>

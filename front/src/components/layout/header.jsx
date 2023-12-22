@@ -10,8 +10,8 @@ const Header = () => {
     const location = window.location.pathname
 
     useEffect(() => {
-        if(!user.currentUser && ['transactions', ''].includes(location.split('/')[1])) {
-            window.location.href = '/login'
+        if(!user.currentUser && ['transactions', ''].includes(location.split('/')[3])) {
+            window.location.href = './login'
         }
     }, [user])
     
@@ -35,7 +35,7 @@ const Header = () => {
                             <li>
                                 <button
                                     className={styles.button}
-                                    onClick={() => window.location.href='/'}
+                                    onClick={() => window.location.href='./'}
                                 >
                                     Home
                                 </button>
@@ -43,7 +43,7 @@ const Header = () => {
                             <li>
                                 <button
                                     className={styles.button}
-                                    onClick={() => window.location.href='/transactions'}
+                                    onClick={() => window.location.href='./transactions'}
                                 >
                                     Transactions
                                 </button>
@@ -63,7 +63,7 @@ const Header = () => {
                             <li>
                                 <button
                                     className={styles.button}
-                                    onClick={() => window.location.href='/register'}
+                                    onClick={() => window.location.href='./register'}
                                 >
                                     Register
                                 </button>    
@@ -71,7 +71,7 @@ const Header = () => {
                             <li>
                                 <button
                                     className={styles.button}
-                                    onClick={() => window.location.href='/login'}
+                                    onClick={() => window.location.href='./login'}
                                 >
                                     Login
                                 </button>

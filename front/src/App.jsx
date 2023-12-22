@@ -2,13 +2,13 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import AuthContext from "./context/authContext";
 import { useState, useCallback, useMemo } from "react";
+import Transactions from "./pages/transactions";
 import Register from './pages/register'
 import Login from './pages/login'
 import Home from './pages/home'
 import './App.css'
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
-import Transactions from "./pages/transactions";
 
 const routes = [
   {path : '/', element: <Home />},
@@ -17,7 +17,9 @@ const routes = [
   {path: '/transactions', element: <Transactions />},
 ]
 
-const router = createBrowserRouter(routes)
+const router = createBrowserRouter(routes,
+    {basename: '/finance-flow/front'}
+  )
 
 const App = () => {
 

@@ -12,7 +12,7 @@ const validateForm = (form) => {
     let errors = {}
     let fields = ['amount', 'category_id']
 
-    errors.amount = parseFloat(form.amount) <= 0 ? 'Amount must be greater than 0' : ''
+    parseFloat(form.amount) <= 0 && (errors.amount = 'Amount must be greater than 0')
 
     fields.forEach((field) => {
         if(form[field] == '' || form[field] == undefined) {

@@ -25,18 +25,19 @@ const Drawer = ({user}) => {
                     </button>
             </div>
             { open && <div className={styles.drawer_content}>
-                    <button
-                        className={styles.drawer_button}
-                        onClick={() => window.location.href='/'}
-                    >
-                        Home
-                    </button>
+                    
                     {
                         user.currentUser ?
                         <>
                             <button
                                 className={styles.drawer_button}
-                                onClick={() => window.location.href='/transactions'}
+                                onClick={() => window.location.href='./'}
+                            >
+                                Home
+                            </button>
+                            <button
+                                className={styles.drawer_button}
+                                onClick={() => window.location.href='./transactions'}
                             >
                                 Transactions
                             </button>
@@ -51,13 +52,13 @@ const Drawer = ({user}) => {
                         <>
                             <button
                                 className={styles.drawer_button}
-                                onClick={() => window.location.href='/register'}
+                                onClick={() => window.location.href='./register'}
                             >
                                 Register
                             </button>
                             <button
                                 className={styles.drawer_button}
-                                onClick={() => window.location.href='/login'}
+                                onClick={() => window.location.href='./login'}
                             >
                                 Login
                             </button>

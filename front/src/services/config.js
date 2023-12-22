@@ -1,3 +1,3 @@
-const BASE_URL = 'http://localhost:80/finance-flow/back/routes/';
+const BASE_URL = '../back/routes/';
 
 export {BASE_URL};

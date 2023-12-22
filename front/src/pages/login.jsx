@@ -38,7 +38,7 @@ const Login = () => {
             .then((auth) => {
                 if (auth.status == 1){
                     user.login(auth.data)
-                    window.location.href = "/"
+                    window.location.href = "./"
             }
         })
     };
@@ -77,7 +77,7 @@ const Login = () => {
             <div>
                 <span>
                     Not registered yet?&nbsp; 
-                    <a href="/register">Register</a>
+                    <a href="./register">Register</a>
                 </span>
             </div>
         </section>

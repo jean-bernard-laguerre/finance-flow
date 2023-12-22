@@ -8,7 +8,6 @@ const useForm = (form, validation) => {
     const [valid, setValid] = useState(false);
 
     const handleChange = (event) => {
-        console.log(values)
         setValues({
             ...values,
             [event.target.name]: event.target.value
